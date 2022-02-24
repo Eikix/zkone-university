@@ -65,10 +65,11 @@ contract Ballot {
      */
     function giveRightToVote(address[] memory voterList) public onlyChairperson {
         for (uint i=0; i < voterList.length; i++) {
-            require(
-                !voters[voterList[i]].voted,
-                "The voter already voted."
-            );
+            // This require is not useful as it does not provide more information than require(voters[voterList[i]].weight == 0);
+            // require(
+            //     !voters[voterList[i]].voted,
+            //     "The voter already voted."
+            // );
             require(voters[voterList[i]].weight == 0, "Voter weight is non-zero");
             voters[voterList[i]].weight = 1;
         }
